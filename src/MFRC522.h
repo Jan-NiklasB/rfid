@@ -272,7 +272,7 @@ public:
 	MFRC522();
 	MFRC522(byte resetPowerDownPin);
 	MFRC522(byte chipSelectPin, byte resetPowerDownPin);
-	MFRC522(byte chipSelectPin, byte resetPowerDownPin, SPI* spiInterface)
+	MFRC522(byte chipSelectPin, byte resetPowerDownPin, SPIClass* spiInterface);
 	
 	/////////////////////////////////////////////////////////////////////////////////////
 	// Basic interface functions for communicating with the MFRC522
@@ -291,7 +291,7 @@ public:
 	void PCD_Init();
 	void PCD_Init(byte resetPowerDownPin);
 	void PCD_Init(byte chipSelectPin, byte resetPowerDownPin);
-	void PCD_Init(byte chipSelectPin, byte resetPowerDownPin, SPI* spiInterface);
+	void PCD_Init(byte chipSelectPin, byte resetPowerDownPin, SPIClass* spiInterface);
 	void PCD_Reset();
 	void PCD_AntennaOn();
 	void PCD_AntennaOff();
@@ -367,6 +367,7 @@ public:
 protected:
 	byte _chipSelectPin;		// Arduino pin connected to MFRC522's SPI slave select input (Pin 24, NSS, active low)
 	byte _resetPowerDownPin;	// Arduino pin connected to MFRC522's reset and power down input (Pin 6, NRSTPD, active low)
+	SPIClass* _spiInterface;			// SPI interface to use (for multi SPI boards)
 	StatusCode MIFARE_TwoStepHelper(byte command, byte blockAddr, int32_t data);
 };
 
